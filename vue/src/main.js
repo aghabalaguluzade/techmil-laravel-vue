@@ -4,5 +4,4 @@ import router from './router';
 
 const app = createApp(App);
 app.use(router);
-app.component('tags-input', VoerroTagsInput);
 app.mount('#app');

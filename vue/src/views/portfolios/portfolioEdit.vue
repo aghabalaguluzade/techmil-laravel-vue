@@ -26,14 +26,6 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="example-price-input">Taq</label>
-                                            <br />
-                                            <input type="text" id="example-price-input" datatype="tagsinput" name="tags" placeholder="Taq Daxil Edin..." v-model="portfolio.tags" />
-                                            <div v-if="errors && errors.tags" class="bg-red">
-                                                <small style="color:red">{{ errors.tags[0] }}</small>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="example-price-input">Link</label>
                                             <input type="url" class="form-control" id="example-price-input" name="url" placeholder="Link Daxil Edin..." v-model="portfolio.url" />
                                             <div v-if="errors && errors.url" class="bg-red">

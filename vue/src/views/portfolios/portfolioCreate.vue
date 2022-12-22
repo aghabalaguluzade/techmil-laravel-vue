@@ -30,7 +30,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="tags-basic">Taq</label>
-                                            <vue3-tags-input :tags="tags"
+                                            <vue3-tags-input
                                                 placeholder="Taq Daxil Edin..."
                                                 @on-tags-changed="handleChangeTag"/>
                                             <div v-if="errors && errors.tags" class="bg-red">
@@ -102,7 +102,7 @@ components: {
     		success.value = true
     		form.value.title = ''
     		form.description = ''
-    		form.value.tags = ''
+    		form.value.tags = []
     		form.value.url = ''
     	} catch(error) {
     		if(error.response.status === 422) {

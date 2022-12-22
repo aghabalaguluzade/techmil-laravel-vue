@@ -126,7 +126,7 @@
            form.value.position = ''
            form.value.linkedin = ''
            form.value.github = ''
-           form.value.websiteS = ''
+           form.value.website = ''
       } catch (error) {
            if(error.response.status === 422) {
                 errors.value = error.response.data.errors;
