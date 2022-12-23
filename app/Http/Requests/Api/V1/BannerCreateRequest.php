@@ -28,7 +28,8 @@ class BannerCreateRequest extends FormRequest
             "description" => ['required'],
             "backgroundImage" => ["required",'image','mimes:png,jpg,jpeg,gif,jfif,webp','max:2048'],
             "number" => ['required','numeric'],
-            "whatsapp" => ['url']
+            "whatsapp" => ['url'],
+            "status" => ['required']
         ];
     }
 }

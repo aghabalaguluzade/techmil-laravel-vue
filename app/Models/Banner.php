@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Banner extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'description', 'backgroundImage', 'number', 'whatsapp'];
+    protected $fillable = ['title', 'description', 'backgroundImage', 'number', 'whatsapp','status'];
 }

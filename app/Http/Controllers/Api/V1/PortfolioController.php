@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\PortfolioRequest;
 use App\Http\Resources\Api\V1\PortfolioResource;
 use App\Models\Portfolio;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
@@ -38,7 +39,14 @@ class PortfolioController extends Controller
      */
     public function store(PortfolioRequest $request)
     {
-        $portfolio = Portfolio::create($request->validated());
+        $data = $request->validated();
+        $image = $request->file("img");
+        $directory = "uploads/portfolios/";
+        $image_name = Str::slug($request->title). '.' . $image->getClientOriginalExtension();
+        $image->move($directory,$image_name);
+        $image_name = $directory.$image_name;
+        $data["img"] = $image_name;
+        $portfolio = Portfolio::create($data);
         $tags = explode(",", $request->input('tags'));
         $portfolio->tag($tags);
         return new PortfolioResource($portfolio);
@@ -74,8 +82,23 @@ class PortfolioController extends Controller
      */
     public function update(PortfolioRequest $request, Portfolio $portfolio)
     {
+        if($request->hasFile("img")) {
+            $data = $request->validated();
+            $image = $request->file("img");
+            $directory = "uploads/portfolios/";
+            $image_name = Str::slug($request->title). '.' . $image->getClientOriginalExtension();
+            if(file_exists($site->img)) {
+                unlink($site->img);
+            };
+            $image->move($directory,$image_name);
+            $image_name = $directory.$image_name;
+            $data["img"] = $image_name;
+            $portfolio->update($data);
+            return new PortfolioResource($portfolio);
+        }
         $portfolio->update($request->validated());
         return new PortfolioResource($portfolio);
+
     }
 
     /**

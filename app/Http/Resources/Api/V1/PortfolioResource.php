@@ -19,6 +19,7 @@ class PortfolioResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'url' => $this->url,
+            'img' => asset($this->img),
             'tags' => $this->whenLoaded('tagged', function() {
             // return $this->tagged;  
             return $this->tagNames();

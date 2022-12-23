@@ -10,5 +10,5 @@ class Portfolio extends Model
     use HasFactory;
     use \Conner\Tagging\Taggable;
     
-    protected $fillable = ['title', 'description', 'url'];
+    protected $fillable = ['title', 'description', 'url', 'img'];
 }

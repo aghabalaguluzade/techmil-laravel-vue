@@ -30,7 +30,8 @@ class BannerUpdateRequest extends FormRequest
                 "description" => ['string'],
                 // "backgroundImage" => ['image','mimes:png,jpg,jpeg,gif,jfif,webp','max:2048'],
                 "number" => ['numeric'],
-                "whatsapp" => ['url']
+                "whatsapp" => ['url'],
+                "status" => ['sometimes']
             ];
         }else {
             return [

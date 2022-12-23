@@ -38,6 +38,15 @@
                                             <input type="url" class="form-control" id="example-price-input" name="whatsapp" placeholder="Link Daxil Edin..." v-model="form.whatsapp" />
                                         </div>
                                         <div class="form-group">
+                                            {{ form.status }}
+                                            <label for="example-select">Status</label>
+                                            <select class="form-control" id="example-select" name="status" @change="changeStatus($event)">
+                                                <option selected disabled>Statusu seçin</option>
+                                                <option value="1">Aktiv</option>
+                                                <option value="0">Deaktiv</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label>Şəkil</label>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input js-custom-file-input-enabled" data-toggle="custom-file-input" id="example-file-input-multiple-custom" name="backgroundImage" @change="onFileChange" />
@@ -67,7 +76,8 @@
         'price' : '', 
         'description' : '',
         'number' : '',
-        'whatsapp' : ''
+        'whatsapp' : '',
+        'status' : ''
     });
 
     const errors = ref("");
@@ -83,6 +93,7 @@
            formdata.append('description',form.value.description)
            formdata.append('number',form.value.number)
            formdata.append('whatsapp',form.value.whatsapp)
+           formdata.append('status',form.value.status)
            let config = 
            { headers: { 
             'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
@@ -94,6 +105,7 @@
            form.value.description = ''
            form.value.number = ''
            form.value.whatsapp  = ''
+           form.value.status = ''
       } catch (error) {
            if(error.response.status === 422) {
                 errors.value = error.response.data.errors;
@@ -104,5 +116,9 @@
 
  const onFileChange = async (e) => {
     form.value.backgroundImage = e.target.files[0]
+ };
+
+ const changeStatus = async (e) => {
+    form.value.status = e.target.value;
  };
 </script>

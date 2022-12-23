@@ -28,9 +28,9 @@ use Illuminate\Foundation\Http\FormRequest;
             case 'POST':
                 return [
                     'title' => ['required','string','max:255'],
+                    "img" => ['image','mimes:png,jpg,jpeg,gif,jfif,webp','max:2048'],
                     'description' => ['required'],
                     'url' => ['required','url'],
-                    'tags' => ['required']
                 ];
                 break;
     
@@ -38,7 +38,7 @@ use Illuminate\Foundation\Http\FormRequest;
                 return [
                     'title' => ['sometimes','required','string','max:255'],
                     'description' => ['sometimes','required'],
-                    'url' => ['sometimes','required','url'],
+                    'url' => ['sometimes','required','url']
                 ];
                 break;
     

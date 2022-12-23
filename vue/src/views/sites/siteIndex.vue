@@ -6,7 +6,7 @@
                         </div>
                         <div class="block-content block-content-full">
                             <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-                            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="DataTables_Table_0_length"><label><select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-control"><option value="5">5</option><option value="10">10</option><option value="20">20</option></select></label></div></div><div class="col-sm-12 col-md-6"><div id="DataTables_Table_0_filter" class="dataTables_filter"><label><input type="search" class="form-control" placeholder="Search.." aria-controls="DataTables_Table_0"></label></div></div></div><div class="row"><div class="col-sm-12"><table class="table table-bordered table-striped table-vcenter js-dataTable-full dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="DataTables_Table_0_length"><label><select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-control"><option value="5">5</option><option value="10">10</option><option value="20">20</option></select></label></div></div><div class="col-sm-12 col-md-6"><div id="DataTables_Table_0_filter" class="dataTables_filter"><label><input type="search" class="form-control" placeholder="Search.." aria-controls="DataTables_Table_0"></label></div></div></div><div class="row table-responsive"><div class="col-sm-12"><table class="table table-bordered table-striped table-vcenter js-dataTable-full dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                 <thead>
                                    <tr role="row">
                                         <th class="text-center sorting_asc" style="width: 80px;" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="#: activate to sort column descending">#</th>
@@ -27,10 +27,10 @@
                                             <img :src="site.img" :alt="site.title" id="img" style="width:100px; height:100px" />
                                         </td>
                                         <td class="font-w600">
-                                                {{ site.title }}
+                                                {{ site.title.substr(0,20) + '...' }}
                                         </td>
                                         <td class="d-none d-sm-table-cell">
-                                            <em class="text-muted" id="description">{{ site.description }}</em>
+                                            <em class="text-muted" id="description">{{ site.description.substr(0,30) + '...' }}</em>
                                         </td>
                                         <td class="d-none d-sm-table-cell">
                                             <span class="badge badge-success" id="price">{{ site.price }} AZN</span>
@@ -53,16 +53,16 @@
      
                                         <!-- Modal -->
 <div class="modal fade" id="siteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <div class="modal-dialog d-flex justify-content-center">
+    <div class="modal-content" style="width:1200px">
       <div class="modal-header">
         <h5 class="modal-title" id="title-name"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body text-center">
-<table class="table table-responsive-sm">
+      <div class="modal-body text-center table-responsive">
+<table class="table">
               <tbody>
               <tr>
                   <th>ID</th>
@@ -70,7 +70,7 @@
                 </tr>
                 <tr>
                   <th>Şəkil</th>
-                  <td id="img-view"><img :src="views.img" :alt="views.title"></td>
+                  <td id="img-view"><img :src="views.img" :alt="views.title" style="width:300px; height:250px"></td>
                 </tr>
                 <tr>
                   <th>Başlıq</th>

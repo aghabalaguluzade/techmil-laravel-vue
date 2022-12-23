@@ -20,6 +20,7 @@ class BannerResource extends JsonResource
             'description' => $this->description,
             'backgroundImage' => asset($this->backgroundImage),
             'number' => $this->number,
+            'status' => $this->status,
             'whatsapp' => $this->whatsapp,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

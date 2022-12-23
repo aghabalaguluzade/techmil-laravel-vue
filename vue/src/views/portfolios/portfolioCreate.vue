@@ -44,12 +44,21 @@
                                             	<small style="color:red">{{ errors.url[0] }}</small>
                                             </div>
                                         </div>
-                                        
                                         <div class="form-group">
                                             <label for="example-textarea-input">Məzmun</label>
                                             <textarea class="form-control" id="example-textarea-input" name="description" rows="4" placeholder="Məzmun Daxil Edin..." v-model="form.description"></textarea>
                                             <div v-if="errors && errors.description" class="bg-red">
                                             	<small style="color:red">{{ errors.description[0] }}</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Şəkil</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input js-custom-file-input-enabled" data-toggle="custom-file-input" id="example-file-input-multiple-custom" name="img" @change="onFileChange" />
+                                                <label class="custom-file-label" for="example-file-input-multiple-custom">Şəkil Əlavə Et</label>
+                                            <div v-if="errors && errors.img" class="bg-red">
+                                                    <small style="color:red">{{ errors.img[0] }}</small>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -75,6 +84,7 @@ components: {
   };
     const form = ref({
         'title' : '',
+        'img' : '',
         'description' : '',
         'url' : '',
         'tags' : [],
@@ -90,6 +100,7 @@ components: {
     const savePortfolio = async () => {
     	try {
     		const formdata = new FormData();
+            formdata.append('img',form.value.img)
     		formdata.append('title',form.value.title)
     		formdata.append('description',form.value.description)
     		formdata.append('url',form.value.url)
@@ -99,11 +110,13 @@ components: {
             'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
             } }
     		await axiosClient.post("portfolios",formdata,config)
+            console.log(formdata)
     		success.value = true
     		form.value.title = ''
     		form.description = ''
     		form.value.tags = []
     		form.value.url = ''
+            form.value.img = ''
     	} catch(error) {
     		if(error.response.status === 422) {
                 errors.value = error.response.data.errors;
@@ -111,4 +124,8 @@ components: {
                 errors.value = error.response.data.errors;
       }
     	}
+
+    const onFileChange = async (e) => {
+        form.value.img = e.target.files[0]
+    };
 </script>

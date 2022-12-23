@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("backgroundImage");
             $table->integer("number");
             $table->string("whatsapp");
+            $table->enum('status', [0,1]);
             $table->timestamps();
         });
     }

@@ -42,7 +42,7 @@ const routes = [
           {
                path : "/sites/create",
                name : "sites.create",
-               component : PortfolioCreate,
+               component : SiteCreate,
                meta : { title : "Saytlar - Əlavə et" }
           },
           {

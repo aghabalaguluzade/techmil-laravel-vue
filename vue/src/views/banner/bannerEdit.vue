@@ -35,6 +35,14 @@
                                             <input type="url" class="form-control" id="example-price-input" name="whatsapp" placeholder="Link Daxil Edin..." v-model="banner.whatsapp" />
                                         </div>
                                         <div class="form-group">
+                                            <label for="example-select">Status</label>
+                                            <select class="form-control" id="example-select" name="status" @change="changeStatus($event)">
+                                                <!-- <option disabled selected>Statusu seçin</option>                                    -->
+                                                <option :value="banner.status === '1' ? 'Aktiv' : 'Deaktiv'">{{  }}</option>
+                                                <!-- <option :value="banner.status">Deaktiv</option> -->
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label>Şəkil</label>
                                             <br />
                                             <img :src="banner.backgroundImage" :alt="banner.title" class="mb-2" style="width:150px; height:150px" />
@@ -86,6 +94,7 @@
            formdata.append('description',banner.value.description)
            formdata.append('number',banner.value.number)
            formdata.append('whatsapp',banner.value.whatsapp)
+           formdata.append('status',banner.value.status)
            formdata.append('_method', "put")
            let config = 
            { headers: { 
@@ -98,6 +107,7 @@
            banner.value.description = ''
            banner.value.number = ''
            banner.value.whatsapp  = ''
+           banner.value.status = ''
       } catch (error) {
            if(error.response.status === 422) {
                 errors.value = error.response.data.errors;
