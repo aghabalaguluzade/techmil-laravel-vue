@@ -64,7 +64,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body text-center table-responsive">
+      <div class="modal-body table-responsive">
 <table class="table">
               <tbody>
               <tr>

@@ -37,15 +37,25 @@
                                         <div class="form-group">
                                             <label for="example-select">Status</label>
                                             <select class="form-control" id="example-select" name="status" @change="changeStatus($event)">
-                                                <!-- <option disabled selected>Statusu seçin</option>                                    -->
-                                                <option :value="banner.status === '1' ? 'Aktiv' : 'Deaktiv'">{{  }}</option>
-                                                <!-- <option :value="banner.status">Deaktiv</option> -->
+                                                <template v-if="banner.status == '1'">
+                                                    <option value="1">Aktiv</option>
+                                                    <option value="0">Deaktiv</option>
+                                                </template>
+                                                <template v-else>
+                                                    <option value="0">Deaktiv</option>
+                                                    <option value="1">Aktiv</option>
+                                                </template>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Şəkil</label>
                                             <br />
-                                            <img :src="banner.backgroundImage" :alt="banner.title" class="mb-2" style="width:150px; height:150px" />
+                                            <div id="preview" class="mb-3 float-left">
+                                                <img :src="banner.previewImg" />
+                                            </div>
+                                            <div id="preview" class="mb-3 float-left">
+                                                <img v-if="banner.backgroundImage" :src="banner.backgroundImage" />
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input js-custom-file-input-enabled" data-toggle="custom-file-input" id="example-file-input-multiple-custom" name="backgroundImage" @change="onFileChange" />
                                                 <label class="custom-file-label" for="example-file-input-multiple-custom">Şəkil Əlavə Et</label>
@@ -118,6 +128,7 @@
 
 	const onFileChange = async (e) => {
 	    banner.value.backgroundImage = e.target.files[0]
+        banner.value.previewImg = URL.createObjectURL(banner.value.backgroundImage);
 	};
 
 	onMounted(() => getBanner(props.id))
@@ -126,4 +137,29 @@
 		await updateBanner(props.id)
 	}
 
+    const changeStatus = async (e) => {
+        banner.value.status = e.target.value;
+    }
+
 </script>
+
+<style scoped>
+body {
+  background-color: #e2e2e2;
+}
+
+#app {
+  padding: 20px;
+}
+
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 150px;
+}
+</style>

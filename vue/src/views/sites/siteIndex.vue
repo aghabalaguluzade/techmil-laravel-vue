@@ -27,10 +27,10 @@
                                             <img :src="site.img" :alt="site.title" id="img" style="width:100px; height:100px" />
                                         </td>
                                         <td class="font-w600">
-                                                {{ site.title.substr(0,20) + '...' }}
+                                                {{ site.title.substr(0,10) + '...' }}
                                         </td>
                                         <td class="d-none d-sm-table-cell">
-                                            <em class="text-muted" id="description">{{ site.description.substr(0,30) + '...' }}</em>
+                                            <em class="text-muted" id="description">{{ site.description.substr(0,10) + '...' }}</em>
                                         </td>
                                         <td class="d-none d-sm-table-cell">
                                             <span class="badge badge-success" id="price">{{ site.price }} AZN</span>

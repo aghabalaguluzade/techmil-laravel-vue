@@ -48,6 +48,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Şəkil</label>
+                                                <br />
+                                                <div id="preview" class="mb-3 float-left">
+                                                    <img :src="form.previewImg" />
+                                                </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input js-custom-file-input-enabled" data-toggle="custom-file-input" id="example-file-input-multiple-custom" name="backgroundImage" @change="onFileChange" />
                                                 <label class="custom-file-label" for="example-file-input-multiple-custom">Şəkil Əlavə Et</label>
@@ -77,7 +81,8 @@
         'description' : '',
         'number' : '',
         'whatsapp' : '',
-        'status' : ''
+        'status' : '',
+        'previewImg' : null
     });
 
     const errors = ref("");
@@ -106,6 +111,7 @@
            form.value.number = ''
            form.value.whatsapp  = ''
            form.value.status = ''
+           form.value.previewImg = '' 
       } catch (error) {
            if(error.response.status === 422) {
                 errors.value = error.response.data.errors;
@@ -116,9 +122,31 @@
 
  const onFileChange = async (e) => {
     form.value.backgroundImage = e.target.files[0]
+    form.value.previewImg = URL.createObjectURL(form.value.backgroundImage);
  };
 
  const changeStatus = async (e) => {
     form.value.status = e.target.value;
  };
 </script>
+
+<style scoped>
+body {
+  background-color: #e2e2e2;
+}
+
+#app {
+  padding: 20px;
+}
+
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 150px;
+}
+</style>

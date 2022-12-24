@@ -53,6 +53,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Şəkil</label>
+                                            <br />
+                                                <div id="preview" class="mb-3 float-left">
+                                                    <img :src="form.previewImg" />
+                                                </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input js-custom-file-input-enabled" data-toggle="custom-file-input" id="example-file-input-multiple-custom" name="img" @change="onFileChange" />
                                                 <label class="custom-file-label" for="example-file-input-multiple-custom">Şəkil Əlavə Et</label>
@@ -88,6 +92,7 @@ components: {
         'description' : '',
         'url' : '',
         'tags' : [],
+        'previewImg' : null
     });
 
     const handleChangeTag = (tags) => {
@@ -110,13 +115,13 @@ components: {
             'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
             } }
     		await axiosClient.post("portfolios",formdata,config)
-            console.log(formdata)
     		success.value = true
     		form.value.title = ''
     		form.description = ''
     		form.value.tags = []
     		form.value.url = ''
             form.value.img = ''
+            form.value.previewImg = '' 
     	} catch(error) {
     		if(error.response.status === 422) {
                 errors.value = error.response.data.errors;
@@ -127,5 +132,27 @@ components: {
 
     const onFileChange = async (e) => {
         form.value.img = e.target.files[0]
+        form.value.previewImg = URL.createObjectURL(form.value.img);
     };
 </script>
+
+<style scoped>
+body {
+  background-color: #e2e2e2;
+}
+
+#app {
+  padding: 20px;
+}
+
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 150px;
+}
+</style>

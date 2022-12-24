@@ -43,7 +43,16 @@
                                         <div class="form-group">
                                             <label>Şəkil</label>
                                             <br />
-                                            <img :src="portfolio.img" :alt="portfolio.title" class="mb-2" style="width:150px; height:150px" />
+                                            <div id="preview" class="mb-3 float-left">
+                                                <img :src="portfolio.previewImg" />
+                                            </div>
+                                            <div id="preview" class="mb-3 float-left">
+                                                <img v-if="portfolio.img" :src="portfolio.img" />
+                                            </div>
+                                        </div>
+                                        <div class="custom-file">
+                                                <input type="file" class="custom-file-input js-custom-file-input-enabled" data-toggle="custom-file-input" id="example-file-input-multiple-custom" name="img" @change="onFileChange" />
+                                                <label class="custom-file-label" for="example-file-input-multiple-custom">Şəkil Əlavə Et</label>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary">Əlavə et</button>
@@ -84,16 +93,14 @@
     		formdata.append('title',portfolio.value.title)
     		formdata.append('description',portfolio.value.description)
     		formdata.append('url',portfolio.value.url)
+            formdata.append('img',portfolio.value.img)
            	formdata.append('_method','put')
     		let config = 
            	{ headers: { 
             'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
             } }
-    		await axiosClient.post(`portfolios/${id}`,formdata,config)
+    		await axiosClient.post(`portfolios/${id}`, formdata, config)
     		await router.push({ name : 'portfolios.index' });
-    		portfolio.value.title = ''
-    		portfolio.description = ''
-    		portfolio.value.url = ''
     	} catch (e) {
         if (e.response.status === 422) {
                 for (const key in e.response.data.errors) {
@@ -103,6 +110,12 @@
       }
     	}
 
+
+    const onFileChange = async (e) => {
+        portfolio.value.img = e.target.files[0]
+        portfolio.value.previewImg = URL.createObjectURL(portfolio.value.img);
+    };
+
 	onMounted(() => getPortfolio(props.id))
 
 	const savePortfolio = async () => {
@@ -110,3 +123,24 @@
     }
 
 </script>
+
+<style scoped>
+body {
+  background-color: #e2e2e2;
+}
+
+#app {
+  padding: 20px;
+}
+
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 150px;
+}
+</style>

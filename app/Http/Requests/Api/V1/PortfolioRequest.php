@@ -23,28 +23,44 @@ use Illuminate\Foundation\Http\FormRequest;
      */
     public function rules()
     {
+        // if(request()->isMethod('post')){
+        //     return [
+        //             'title' => ['required','string','max:255'],
+        //             "img" => ['required','image','mimes:png,jpg,jpeg,gif,jfif,webp','max:2048'],
+        //             'description' => ['required'],
+        //             'url' => ['required','url'],
+        //     ];
+        // }else if(request()->isMethod('put')) {
+        //     return [
+        //             'title' => ['sometimes','required','string','max:255'],
+        //             'description' => ['sometimes','required'],
+        //             'url' => ['sometimes','required','url'],
+        //             // 'img' => ['sometimes','image','mimes:png,jpg,jpeg,gif,jfif,webp','max:2048']
+        //     ];
+        // }else {
+        //     return [
+        //             'title' => ['sometimes','required','string','max:255'],
+        //             'description' => ['sometimes','required'],
+        //             'url' => ['sometimes','required','url'],
+        //             'img' => ['sometimes','image','mimes:png,jpg,jpeg,gif,jfif,webp','max:2048']
+        //     ];
+        // }
+
         $method = $this->method();
-        switch ($method) {
-            case 'POST':
-                return [
-                    'title' => ['required','string','max:255'],
-                    "img" => ['image','mimes:png,jpg,jpeg,gif,jfif,webp','max:2048'],
-                    'description' => ['required'],
-                    'url' => ['required','url'],
-                ];
-                break;
-    
-            case 'PUT':
-                return [
-                    'title' => ['sometimes','required','string','max:255'],
-                    'description' => ['sometimes','required'],
-                    'url' => ['sometimes','required','url']
-                ];
-                break;
-    
-            default:
-                // invalid request
-                break;
-        }
+        if($method == 'PUT') {
+            return [
+                "title" => ['string','max:255'],
+                "description" => ['string'],
+                // "img" => ['image','mimes:png,jpg,jpeg,gif,jfif,webp','max:2048'],
+                'url' => ['sometimes','required','url'],
+            ];
+        }else {
+            return [
+                "title" => ['sometimes','required','max:255'],
+                "description" => ['sometimes','required'],
+                "img" => ['sometimes',"required",'image','mimes:png,jpg,jpeg,gif,jfif,webp','max:2048'],
+                'url' => ['sometimes','required','url'],
+            ];
+        };
     }
 }

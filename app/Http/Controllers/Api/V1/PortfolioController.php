@@ -28,7 +28,7 @@ class PortfolioController extends Controller
      */
     public function create()
     {
-        return view("portfolio.create");
+
     }
 
     /**
@@ -87,8 +87,8 @@ class PortfolioController extends Controller
             $image = $request->file("img");
             $directory = "uploads/portfolios/";
             $image_name = Str::slug($request->title). '.' . $image->getClientOriginalExtension();
-            if(file_exists($site->img)) {
-                unlink($site->img);
+            if(file_exists($portfolio->img)) {
+                unlink($portfolio->img);
             };
             $image->move($directory,$image_name);
             $image_name = $directory.$image_name;

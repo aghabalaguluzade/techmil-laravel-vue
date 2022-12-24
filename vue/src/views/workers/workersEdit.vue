@@ -63,7 +63,12 @@
                                         <div class="form-group">
                                             <label>Şəkil</label>
                                             <br />
-                                            <img :src="worker.img" :alt="worker.title" class="mb-2" style="width:150px; height:150px" />
+                                            <div id="preview" class="mb-3 float-left">
+                                                <img :src="worker.previewImg" />
+                                            </div>
+                                            <div id="preview" class="mb-3 float-left">
+                                                <img v-if="worker.img" :src="worker.img" />
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input js-custom-file-input-enabled" data-toggle="custom-file-input" id="example-file-input-multiple-custom" name="img" @change="onFileChange" />
                                                 <label class="custom-file-label" for="example-file-input-multiple-custom">Şəkil Əlavə Et</label>
@@ -129,7 +134,8 @@
            worker.value.position = ''
            worker.value.linkedin = ''
            worker.value.github = ''
-           worker.value.websiteS = ''
+           worker.value.website = ''
+           worker.value.previewImg = ''
       } catch (error) {
            if(error.response.status === 422) {
                 errors.value = error.response.data.errors;
@@ -140,6 +146,7 @@
 
 	const onFileChange = async (e) => {
     	worker.value.img = e.target.files[0]
+        worker.value.previewImg = URL.createObjectURL(worker.value.img);
 	}
 
 	onMounted(() => getWorker(props.id))
@@ -150,3 +157,24 @@
 
 
 </script>
+
+<style scoped>
+body {
+  background-color: #e2e2e2;
+}
+
+#app {
+  padding: 20px;
+}
+
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 150px;
+}
+</style>

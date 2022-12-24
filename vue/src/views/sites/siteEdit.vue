@@ -42,7 +42,12 @@
                                         <div class="form-group">
                                             <label>Şəkil</label>
                                             <br />
-                                            <img :src="site.img" :alt="site.title" class="mb-2" style="width:150px; height:150px" />
+                                            <div id="preview" class="mb-3 float-left">
+                                                <img :src="site.previewImg" />
+                                            </div>
+                                            <div id="preview" class="mb-3 float-left">
+                                                <img v-if="site.img" :src="site.img" id="preview" class="mb-2" />
+                                            </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input js-custom-file-input-enabled" data-toggle="custom-file-input" id="example-file-input-multiple-custom" name="img"  @change="onFileChange" />
                                                 <label class="custom-file-label" for="example-file-input-multiple-custom">Şəkil Əlavə Et</label>
@@ -111,6 +116,7 @@
 
     const onFileChange = async (e) => {
         site.value.img = e.target.files[0]
+        site.value.previewImg = URL.createObjectURL(site.value.img)
     };
 
 
@@ -121,3 +127,24 @@
     }
 
 </script>
+
+<style scoped>
+body {
+  background-color: #e2e2e2;
+}
+
+#app {
+  padding: 20px;
+}
+
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#preview img {
+  max-width: 100%;
+  max-height: 150px;
+}
+</style>

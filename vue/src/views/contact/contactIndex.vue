@@ -25,19 +25,19 @@
                                 <tr class="odd">
                                         <td class="text-center sorting_1">{{ contact.id }}</td>
                                         <td class="font-w600">
-                                          <p>{{ contact.subject }}</p>
+                                          <p>{{ contact.subject.substr(0,10) + '...' }}</p>
                                         </td>
                                         <td class="font-w600">
-                                          <p>{{ contact.name }}</p>
+                                          <p>{{ contact.name.substr(0,10) + '...' }}</p>
                                         </td>
                                         <td class="font-w600">
-                                          <p>{{ contact.surname }}</p>
+                                          <p>{{ contact.surname.substr(0,10) + '...' }}</p>
                                         </td>
                                         <td class="font-w600">
-                                          <a href="mailto:{{ contact.email }}" id="email">{{ contact.email }}</a>
+                                          <a href="mailto:{{ contact.email }}" id="email">{{ contact.email.substr(0,10) + '...' }}</a>
                                         </td>
                                         <td class="d-none d-sm-table-cell">
-                                          <em class="text-muted" id="message">{{ contact.message }}</em>
+                                          <em class="text-muted" id="message">{{ contact.message.substr(0,7) + '...' }}</em>
                                         </td>
                                         <td id="operations">
                                           <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#contactModal" @click="onMounted(getView(contact.id))">Bax</button>  
@@ -64,7 +64,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body text-center table-responsive">
+      <div class="modal-body table-responsive">
 <table class="table">
               <tbody>
               <tr>

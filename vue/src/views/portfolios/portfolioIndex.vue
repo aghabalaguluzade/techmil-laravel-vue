@@ -23,10 +23,10 @@
                                 <tr class="odd">
                                         <td class="text-center sorting_1">{{ portfolio.id }}</td>
                                         <td class="font-w600">
-                                            <p>{{ portfolio.title }}</p>
+                                            <p>{{ portfolio.title.substr(0,10) + '...' }}</p>
                                         </td>
                                         <td class="d-none d-sm-table-cell">
-                                            <span class="badge badge-success" id="price"><a :href="portfolio.url">{{ portfolio.url }}</a></span>
+                                            <span class="badge badge-success" id="price"><a :href="portfolio.url">{{ portfolio.url.substr(0,10) + '...' }}</a></span>
                                         </td>
                                         <td class="d-none d-sm-table-cell">
                                             <template v-for="tag in portfolio.tags" :key="tag.id">
@@ -34,7 +34,7 @@
                                             </template>
                                         </td>
                                         <td class="d-none d-sm-table-cell">
-                                            <em class="text-muted" id="description">{{ portfolio.description }}</em>
+                                            <em class="text-muted" id="description">{{ portfolio.description.substr(0,10) + '...' }}</em>
                                         </td>
                                         <td id="operations">
                                             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#portfolioModal" @click="onMounted(getView(portfolio.id))">Bax</button>                                        
@@ -62,7 +62,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body text-center table-responsive">
+      <div class="modal-body table-responsive">
     <table class="table">
               <tbody>
               <tr>

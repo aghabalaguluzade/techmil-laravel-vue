@@ -28,16 +28,21 @@
                                             <img :src="banner.backgroundImage" :alt="banner.title" id="img" style="width:100px; height:100px" />
                                         </td>
                                         <td class="font-w600">
-                                            <a href="be_pages_generic_blank.html" id="title">{{ banner.title }}</a>
+                                            <a href="be_pages_generic_blank.html" id="title">{{ banner.title.substr(0,10) + '...' }}</a>
                                         </td>
                                         <td class="d-none d-sm-table-cell">
-                                            <em class="text-muted" id="description">{{ banner.description.substr(0,20) + '...' }}</em>
+                                            <em class="text-muted" id="description">{{ banner.description.substr(0,10) + '...' }}</em>
                                         </td>
                                         <td class="d-none d-sm-table-cell">
                                             <span class="badge badge-success" id="price">{{ banner.number }}</span>
                                         </td>
                                         <td class="d-none d-sm-table-cell">
-                                            <span class="badge badge-success" id="price">{{ banner.status }}</span>
+                                            <div v-if="banner.status == '1' ">
+                                              <span class="badge badge-success">Aktiv</span>
+                                            </div>
+                                            <div v-else>
+                                              <span class="badge badge-danger">Deaktiv</span>
+                                            </div>
                                         </td>
                                         <td id="operations">
                                             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#bannerModal" @click="onMounted(getView(banner.id))">Bax</button>                                        
